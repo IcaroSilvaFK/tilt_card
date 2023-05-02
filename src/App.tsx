@@ -41,19 +41,21 @@ function App() {
     const dfX = DIFF_RX * percentageX + MIN_RX;
     const dfY = DIFF_RY * percentageY + MIN_RY;
 
-    console.log({
-      dfX,
-      dfY
-    })
+
     cardRef.current!.style.willChange = "transform";
     cardRef.current!.style.transform = `perspective(1000px) rotateX(${dfX}deg) rotateY(${dfY}deg) scale3d(1, 1, 1)`;
   }
 
+  function handleRemoveEventListener(){
+    cardRef.current!.style.transform =  `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+  }
+
   return (
-    <div className="App">
+    <div style={{ width: "100vw", height: "100vh",display:'flex',alignItems:'center', justifyContent:'center' }}>
       <div
         style={{ width: 300, height: 300, background: "red" }}
         onMouseMoveCapture={handleMoveMouseInCard}
+        onMouseLeave={handleRemoveEventListener}
         ref={cardRef}
       >
         <h1>card</h1>
